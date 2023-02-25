@@ -19,4 +19,11 @@
 
 {% endmacro %}
 
-
+{% macro render_number(field) %}
+<div class="control-group">
+    <div class="controls">
+        {{ field.label }}
+        <input type="number" name="{{ field.name }}" value="{{ field.data }}">
+    </div>
+</div>
+{% endmacro %}

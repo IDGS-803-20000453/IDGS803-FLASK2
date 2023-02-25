@@ -1,3 +1,4 @@
+
 from wtforms import Form
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, FieldList, FormField, SelectField, RadioField
@@ -12,6 +13,7 @@ class UserForm(Form):
     email=EmailField('Correo')
     numero = IntegerField('Número')
 
-
 class DynamicForm(FlaskForm):
-    submit = SubmitField('Registrar')
+    pass
+
+    

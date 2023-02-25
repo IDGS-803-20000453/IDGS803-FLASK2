@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask import request
+from collections import Counter
 
 
 import forms
 
 app=Flask(__name__)
-
+app.config['WTF_CSRF_ENABLED'] = False
 @app.route("/formulario")
 def formulario():
     return render_template("formulario.html")
@@ -26,19 +27,30 @@ def cajas_dinamicas():
     if request.method == 'POST':
         if num_form.validate():
             num_campos = num_form.numero.data
-            return redirect(url_for('nuevo_formulario', num_campos=num_campos))
+            return redirect(url_for('nuevo_formulario', num_campos=num_campos, form_data=num_form.data))
     return render_template("cajas_dinamicas.html", form=num_form)
+
 
 
 @app.route('/nuevo_formulario/<int:num_campos>', methods=['GET', 'POST'])
 def nuevo_formulario(num_campos):
+    form_data = request.args.get('form_data')
     form = forms.DynamicForm(request.form)
+    form.num_campos = num_campos
     if request.method == 'POST':
+        valores = []
         for i in range(num_campos):
             fieldname = 'num{}'.format(i+1)
             value = request.form.get(fieldname, '')
-            print('Valor de {}: {}'.format(fieldname, value))
-    return render_template('nuevo_formulario.html', form=form, num_campos=num_campos)
+            valores.append(float(value))
+        promedio = sum(valores) / num_campos
+        maximo = max(valores)
+        minimo = min(valores)
+        repeticiones = [num for num, count in Counter(valores).items() if count > 1]
+        return render_template('formulario_dinamico.html', form=form, promedio=promedio, maximo=maximo, minimo=minimo, repeticiones=repeticiones)
+    return render_template('formulario_dinamico.html', form=form)
+
+
 
 
 

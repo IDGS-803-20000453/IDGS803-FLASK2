@@ -3,7 +3,7 @@
 {% block content %}
 <div class="col-xs-6">
     <form action="" method="post">
-        {% for i in range(form.numero.data) %}
+        {% for i in range(form.num_campos) %}
         <div class="control-group">
             <label class="control-label" for="num{{i+1}}">Número {{i+1}}</label>
             <div class="controls">
@@ -11,8 +11,14 @@
             </div>
         </div>
         {% endfor %}
-        <input type="submit" value="Registrar">
+        <input type="submit" value="Calcular">
     </form>
+    {% if promedio is not none %}
+    <h2>Resultados</h2>
+    <p>Promedio: {{ promedio }}</p>
+    <p>Máximo: {{ maximo }}</p>
+    <p>Mínimo: {{ minimo }}</p>
+    <p>Números repetidos: {{ repeticiones }}</p>
+{% endif %}
 </div>
-
 {% endblock %}

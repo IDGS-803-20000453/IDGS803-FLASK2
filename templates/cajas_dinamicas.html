@@ -1,11 +1,12 @@
 {% extends "layout.html" %}
-
 {% block content %}
+
 <div class="col-xs-6">
     {% from "_macros.html" import render_field %}
     <form action="" method="post">
-        {{ render_field(form.numero, render_kw={"type": "number"}) }}
+        {{render_field(form.numero)}}
         <input type="submit" value="Registrar">
     </form>
 </div>
+
 {% endblock %}

@@ -1,0 +1,3 @@
+red rojo
+green verde
+translate traductor

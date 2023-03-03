@@ -15,7 +15,13 @@
     
     <link   rel="stylesheet" href="../static/bootstrap/css/bootstrap-responsive.min.css"
 </head>
-<body>
+<style>
+    .fondo-amigable {
+      background-color: #f2f2f2;
+    }
+  </style>
+  
+  <body class="fondo-amigable">
     
     <div class="navbar navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
@@ -50,7 +56,6 @@
         
     </div>
     <div class="container">
-        {% width messages=get_finished_messages() %}
         {% if messages %}
         {% for message in messages %}
         <div class="alert alert-success">

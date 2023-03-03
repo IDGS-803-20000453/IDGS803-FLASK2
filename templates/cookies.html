@@ -1,17 +1,17 @@
-{% extends "layout.html" %}
+{%extends 'layout.html'%}
 {% block content %}
+{%from "_macros.html" import render_field%}
 
-<div class="col-xs-6">
-    {% from "_macros.html" import render_field %}
-    <form action="" method="post" novalidate>
-        {{form.csrf_token}}
-        <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
-        {{render_field(form.username)}}
-        {{render_field(form.password)}}
-        <input type="submit" value="Registrar">
-
-
-    </form>
-</div>
+<form method="post" class="form-group" novalidate>
+    <div class="col-md-6">
+         {{form.csrf_token}}
+         <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+         {{render_field(form.username)}}
+         {{render_field(form.password)}}
+         <button type="submit" class="btn btn-primary mt-3">
+              <i class="icon-ok"></i> Guardar
+         </button>
+    </div>
+</form>
 
 {% endblock %}

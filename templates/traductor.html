@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <style>
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    button[type="submit"] {
+  margin-left: 15%;
+}
+  </style>
+
+  <div class="container">
+    <h2 class="text-center my-4">Traductor de palabras</h2>
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-6">
+        <form class="form-horizontal" action="/traductor" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <div class="form-group">
+            <label class="control-label" for="palabraEsp">Palabra en español:</label>
+            <input type="text" class="form-control" name="palabraEsp" placeholder="Introduzca la palabra en español">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="palabraEng">Palabra en inglés:</label>
+            <input type="text" class="form-control" name="palabraEng" placeholder="Introduzca la palabra en inglés">
+          </div>
+    
+          <div class="form-group mt-2">
+            <button type="submit" class="btn btn-primary">Guardar palabras</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+    
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+        <form class="form-horizontal" action="/traductor" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <div class="form-group">
+            <label class="control-label" for="palabra">Palabra a traducir:</label>
+            <input type="text" class="form-control" name="palabra" placeholder="Introduzca la palabra a traducir">
+          </div>
+          
+          <div class="form-group mt-4">
+            <button type="submit" class="btn btn-primary">Traducir</button>
+          </div>
+    
+          {% if result %}
+            <div class="form-group mt-4">
+              <input class="form-control" value="Traducción{{palabra}}: {{ result }}" readonly>
+            </div>
+          {% else %}
+            <div class="form-group mt-4">
+              <input class="form-control" value="La palabra no ha sido ingresada aún" readonly>
+            </div>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
